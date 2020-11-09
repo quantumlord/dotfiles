@@ -13,43 +13,53 @@ set signcolumn=number
 set smartcase
 set smartindent
 set tabstop=4 softtabstop=4
+set timeoutlen=1000
+set ttimeoutlen=5
 set undodir=~/.vim/undodir
 set undofile
 set updatetime=300
 
+augroup focus
+    autocmd!
+    autocmd WinEnter * set colorcolumn=81
+    autocmd WinLeave * set colorcolumn=0
+augroup END
+
 "Auto install vim-plug
 if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  silent !mkdir ~/.vim/undodir
-  autocmd VimEnter * PlugInstall | source $MYVIMRC
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+          \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    silent !mkdir ~/.vim/undodir
+    autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
-
 
 call plug#begin('~/.vim/plugged')
 
-"Auto install plugins
-if !empty(filter(copy(g:plugs), '!isdirectory(v:val.dir)'))
-  autocmd VimEnter * PlugInstall | q
-endif
+    "Auto install plugins
+    if !empty(filter(copy(g:plugs), '!isdirectory(v:val.dir)'))
+        autocmd VimEnter * PlugInstall | q
+    endif
 
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'jiangmiao/auto-pairs'
-Plug 'mbbill/undotree'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'sainnhe/gruvbox-material'
-Plug 'scrooloose/nerdtree'
-Plug 'tpope/vim-fugitive'
-Plug 'uiiaoo/java-syntax.vim'
-Plug 'vim-airline/vim-airline'
-Plug 'wellle/context.vim'
+    Plug 'ctrlpvim/ctrlp.vim'
+    Plug 'jeffkreeftmeijer/vim-numbertoggle'
+    Plug 'jiangmiao/auto-pairs'
+    Plug 'mbbill/undotree'
+    Plug 'mhinz/vim-signify'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'sainnhe/gruvbox-material'
+    Plug 'scrooloose/nerdtree'
+    Plug 'sheerun/vim-polyglot'
+    Plug 'tpope/vim-fugitive'
+    Plug 'uiiaoo/java-syntax.vim'
+    Plug 'vim-airline/vim-airline'
+    Plug 'wellle/context.vim'
 
 call plug#end()
 
-colorscheme gruvbox-material
-let g:gruvbox_material_transparent_background = 1
-set background=dark
 set termguicolors
+set background=dark
+let g:gruvbox_material_background = 'hard'
+colorscheme gruvbox-material
 
 map <C-n> :NERDTreeToggle<CR>
 
