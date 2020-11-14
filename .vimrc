@@ -6,7 +6,7 @@ set hidden
 set mouse=a
 set noshowmode
 set nowrap
-set nu rnu
+set nu
 set shiftwidth=4
 set shortmess+=c
 set signcolumn=number
@@ -19,11 +19,25 @@ set undodir=~/.vim/undodir
 set undofile
 set updatetime=300
 
-augroup focus
-    autocmd!
-    autocmd WinEnter * set colorcolumn=81
-    autocmd WinLeave * set colorcolumn=0
-augroup END
+autocmd InsertEnter * set nornu
+autocmd InsertLeave * set rnu
+autocmd WinEnter * set colorcolumn=81
+autocmd WinLeave * set colorcolumn=0
+
+function! ExitNormalMode()
+    unmap <buffer> <silent> <RightMouse>
+    call feedkeys("a")
+endfunction
+
+function! EnterNormalMode()
+    if &buftype == 'terminal' && mode('') == 't'
+        call feedkeys("\<c-w>N")
+        call feedkeys("\<c-y>")
+        map <buffer> <silent> <LeftMouse> :call ExitNormalMode()<CR>
+    endif
+endfunction
+
+tmap <silent> <ScrollWheelUp> <c-w>:call EnterNormalMode()<CR>
 
 "Auto install vim-plug
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -41,10 +55,8 @@ call plug#begin('~/.vim/plugged')
     endif
 
     Plug 'ctrlpvim/ctrlp.vim'
-    Plug 'jeffkreeftmeijer/vim-numbertoggle'
     Plug 'jiangmiao/auto-pairs'
     Plug 'mbbill/undotree'
-    Plug 'mhinz/vim-signify'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'sainnhe/gruvbox-material'
     Plug 'scrooloose/nerdtree'
