@@ -1,12 +1,18 @@
-filetype plugin indent on
+"      ____    _
+"     / ___|  / \       Ghazi Akel
+"    | |  _  / _ \      https://github.com/quantumlord
+"    | |_| |/ ___ \     vimrc
+"    \____//_/   \_\
+"
 syntax on
+filetype plugin indent on
 
+set clipboard=unnamedplus
 set expandtab
 set hidden
 set mouse=a
 set noshowmode
 set nowrap
-set nu
 set shiftwidth=4
 set shortmess+=c
 set signcolumn=number
@@ -19,10 +25,12 @@ set undodir=~/.vim/undodir
 set undofile
 set updatetime=300
 
-autocmd InsertEnter * set nornu
-autocmd InsertLeave * set rnu
+autocmd InsertEnter * set nu nornu
+autocmd InsertLeave * set nu rnu
 autocmd WinEnter * set colorcolumn=81
 autocmd WinLeave * set colorcolumn=0
+autocmd WinEnter * set nu rnu
+autocmd WinLeave * set nu nornu
 
 function! ExitNormalMode()
     unmap <buffer> <silent> <RightMouse>
@@ -56,6 +64,7 @@ call plug#begin('~/.vim/plugged')
 
     Plug 'ctrlpvim/ctrlp.vim'
     Plug 'jiangmiao/auto-pairs'
+    Plug 'johannesthyssen/vim-signit'
     Plug 'mbbill/undotree'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'sainnhe/gruvbox-material'
@@ -70,7 +79,7 @@ call plug#end()
 
 set termguicolors
 set background=dark
-let g:gruvbox_material_background = 'hard'
+let g:gruvbox_material_transparent_background = 1
 colorscheme gruvbox-material
 
 map <C-n> :NERDTreeToggle<CR>
@@ -83,4 +92,3 @@ let g:context_enabled = 0
 map <C-c> :ContextToggle<CR>
 
 let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
