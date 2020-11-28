@@ -7,7 +7,7 @@
 syntax on
 filetype plugin indent on
 
-set clipboard=unnamedplus
+set colorcolumn=81
 set expandtab
 set hidden
 set mouse=a
@@ -20,7 +20,7 @@ set smartcase
 set smartindent
 set tabstop=4 softtabstop=4
 set timeoutlen=1000
-set ttimeoutlen=5
+set ttimeoutlen=0
 set undodir=~/.vim/undodir
 set undofile
 set updatetime=300
@@ -63,26 +63,20 @@ call plug#begin('~/.vim/plugged')
     endif
 
     Plug 'ctrlpvim/ctrlp.vim'
+    Plug 'flazz/vim-colorschemes'
     Plug 'jiangmiao/auto-pairs'
     Plug 'johannesthyssen/vim-signit'
     Plug 'mbbill/undotree'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    Plug 'sainnhe/gruvbox-material'
-    Plug 'scrooloose/nerdtree'
     Plug 'sheerun/vim-polyglot'
-    Plug 'tpope/vim-fugitive'
     Plug 'uiiaoo/java-syntax.vim'
     Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
     Plug 'wellle/context.vim'
 
 call plug#end()
 
-set termguicolors
-set background=dark
-let g:gruvbox_material_transparent_background = 1
-colorscheme gruvbox-material
-
-map <C-n> :NERDTreeToggle<CR>
+colorscheme Tomorrow-Night
 
 nnoremap <C-u> :UndotreeToggle<cr>
 
@@ -91,4 +85,6 @@ let g:ctrlp_map = '<c-p>'
 let g:context_enabled = 0
 map <C-c> :ContextToggle<CR>
 
+let g:airline_theme='tomorrow'
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
