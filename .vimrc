@@ -4,10 +4,12 @@
 "    | |_| |/ ___ \     .vimrc
 "    \____//_/   \_\
 "
+
 syntax on
 filetype plugin indent on
 
 set colorcolumn=81
+set encoding=utf8
 set expandtab
 set hidden
 set mouse=a
@@ -23,6 +25,7 @@ set ttimeoutlen=0
 set undodir=~/.vim/undodir
 set undofile
 
+autocmd VimEnter * hi Normal ctermbg=none
 autocmd InsertEnter * set nu nornu
 autocmd InsertLeave * set nu rnu
 autocmd WinEnter * set colorcolumn=81
@@ -47,20 +50,22 @@ call plug#begin('~/.vim/plugged')
 
     Plug 'ctrlpvim/ctrlp.vim'
     Plug 'jiangmiao/auto-pairs'
-    Plug 'johannesthyssen/vim-signit'
+    Plug 'lervag/vimtex'
     Plug 'mbbill/undotree'
     Plug 'morhetz/gruvbox'
+    Plug 'preservim/nerdtree'
     Plug 'vim-airline/vim-airline'
     Plug 'wellle/context.vim'
 
 call plug#end()
 
-let g:gruvbox_italic=1
-set termguicolors
-colorscheme gruvbox
+let g:gruvbox_transparent_bg='1'
 set background=dark
+colorscheme gruvbox
 
 nnoremap <C-u> :UndotreeToggle<cr>
+
+nnoremap <C-n> :NERDTreeToggle<CR>
 
 let g:ctrlp_map = '<c-p>'
 
